@@ -52,7 +52,7 @@ namespace ConsoleUI
 
             Brand brand1 = new Brand
             {
-                Name = "C"
+                Name = "A"
             };
 
             brandManager.Add(brand1);
