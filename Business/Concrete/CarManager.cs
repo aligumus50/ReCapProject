@@ -30,7 +30,19 @@ namespace Business.Concrete
 
         public void Add(Car car)
         {
-            _carDal.Add(car);
+            if (CheckAllPropertyControls(car))
+            {
+                _carDal.Add(car);
+                Console.WriteLine(car.Description + " başarıyla eklendi.");
+            }
+
+            else
+            {
+                Console.WriteLine("Daily price 0'dan büyük olmalı.");
+            }
+            
+
+            
         }
 
         public void Delete(Car car)
@@ -41,11 +53,37 @@ namespace Business.Concrete
         {
             _carDal.Update(car);
         }
-        public Car GetById(int id)
+
+        public List<Car> GetCarsByBrandId(int id)
         {
-            return _carDal.GetById(id);
+            //gönderdiğimiz id ye eşit olan arabaları getir.
+            return _carDal.GetAll(c => c.BrandId == id);
         }
 
-        
+        public List<Car> GetCarsByColorId(int id)
+        {
+           
+            return _carDal.GetAll(c => c.ColorId == id);
+
+            
+                 
+        }
+
+        /*public Car GetById(int id)
+        {
+            return _carDal.GetById(id);
+        }*/
+
+
+        private bool CheckAllPropertyControls(Car car)
+        {
+            if (car.DailyPrice<=0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
     }
 }

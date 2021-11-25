@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
@@ -9,20 +10,54 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new InMemoryCarDal());
-
-            carManager.Add(new Car{ Id=3, BrandId=4, ColorId="5", DailyPrice=80000, ModelYear="2010", Description="Renault Clio"});
-
-            carManager.Delete(new Car { Id = 1 });
-
-            carManager.Update(new Car { Id = 2, Description = "Honda" });
+            CarManager carManager = new CarManager(new EfCarDal());
 
             foreach (var car in carManager.GetAll())
             {
                 Console.WriteLine(car.Description);
             }
 
-            Console.WriteLine(carManager.GetById(2).Description);
+            Console.WriteLine("********ByBrandId***********");
+
+            foreach (var car in carManager.GetCarsByBrandId(1))
+            {
+                Console.WriteLine(car.Description);
+            }
+
+            Console.WriteLine("********ByColorId***********");
+
+            foreach (var car in carManager.GetCarsByColorId(2))
+            {
+                Console.WriteLine(car.Description);
+            }
+
+            Console.WriteLine("********AddCars***********");
+
+            Car car1 = new Car {
+                BrandId=2, ColorId=3, ModelYear="2020", DailyPrice=0, Description="BMW 320i First Edition"
+            };
+
+            carManager.Add(car1);
+
+            Console.WriteLine("********GetBrands***********");
+
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+
+            foreach (var brand in brandManager.GetAll())
+            {
+                Console.WriteLine(brand.Name);
+            }
+
+            Console.WriteLine("********AddBrand***********");
+
+            Brand brand1 = new Brand
+            {
+                Name = "C"
+            };
+
+            brandManager.Add(brand1);
+
+            Console.ReadLine();
         }
     }
 }
