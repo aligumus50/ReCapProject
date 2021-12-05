@@ -2,6 +2,7 @@
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -54,25 +55,23 @@ namespace Business.Concrete
             _carDal.Update(car);
         }
 
-        public List<Car> GetCarsByBrandId(int id)
+        public List<Car> GetCarsByBrandId(int brandId)
         {
             //gönderdiğimiz id ye eşit olan arabaları getir.
-            return _carDal.GetAll(c => c.BrandId == id);
+            return _carDal.GetAll(c => c.BrandId == brandId);
         }
-
-        public List<Car> GetCarsByColorId(int id)
+       
+        public List<Car> GetCarsByColorId(int colorId)
         {
            
-            return _carDal.GetAll(c => c.ColorId == id);
-
-            
+            return _carDal.GetAll(c => c.ColorId == colorId);
                  
         }
 
-        /*public Car GetById(int id)
+        public Car GetById(int carId)
         {
-            return _carDal.GetById(id);
-        }*/
+            return _carDal.Get(c=>c.Id==carId);
+        }
 
 
         private bool CheckAllPropertyControls(Car car)
@@ -85,5 +84,9 @@ namespace Business.Concrete
             return true;
         }
 
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
+        }
     }
 }
