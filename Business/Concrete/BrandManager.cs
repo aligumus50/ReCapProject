@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -16,40 +18,42 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        public void Add(Brand brand)
+        public IResult Add(Brand brand)
         {
             if (CheckAllPropertyControls(brand))
             {
                 _brandDal.Add(brand);
 
-                Console.WriteLine(brand.Name + " başarıyla eklendi.");
+                return new SuccessResult(Messages.BrandAdded);
             }
 
             else
             {
-                Console.WriteLine("Brand name min 2 karakter olmalıdır.");
+                return new ErrorResult(Messages.BrandNameInvalid);
             }
             
         }
 
-        public void Delete(Brand brand)
+        public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
+            return new SuccessResult(Messages.BrandDeleted);
         }
 
-        public List<Brand> GetAll()
+        public IDataResult<List<Brand>> GetAll()
         {
-            return _brandDal.GetAll();
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages.BrandsListed) ;
         }
 
-        public Brand GetById(int brandId)
+        public IDataResult<Brand> GetById(int brandId)
         {
-            return _brandDal.Get(b => b.Id == brandId);
+            return new SuccessDataResult<Brand>( _brandDal.Get(b => b.Id == brandId));
         }
 
-        public void Update(Brand brand)
+        public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
+            return new SuccessResult(Messages.BrandDeleted);
         }
 
         private bool CheckAllPropertyControls(Brand brand)
