@@ -30,6 +30,23 @@ namespace Business.Constants
 
         //Maintenance(Bakım)
         public static string MaintenanceTime = "Sistem bakımda.";
+
+        //User Constants
+        public static string UsersListed="Kullanıcılar Listelendi";
+        public static string UserAdded="Kullanıcı Eklendi";
+
+        //Customer Constants
+        public static string CustomerAdded="Müşteri eklendi.";
+        public static string CustomerDeleted = "Müşteri silindi.";
+        public static string CustomerUpdated = "Müşteri güncellendi.";
+        public static string CustomersListed = "Müşteriler Listelendi";
         
+        //Rental Constants
+        public static string RentalAdded = "Kiralama eklendi";
+        public static string RentalDeleted = "Kiralama silindi";
+        public static string RentalUpdated = "Kiralama güncellendi";
+        public static string RentalListed = "Kiralamalar Listelendi";
+
+        public static string RentalNotAvailable = "Araç kiralanabilir değil";
     }
 }

@@ -18,6 +18,87 @@ namespace ConsoleUI
 
             //CarTestGetById();
 
+            //CarTestResult();
+
+            //CustomerList();
+
+            //CustomerAdd();
+
+            //UserAdd();
+
+            //UserList();
+
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+
+            Rental rental1 = new Rental
+            {
+                CarId = 3,
+                CustomerId = 1,
+                RentDate = DateTime.Now,
+                //ReturnDate=new DateTime(2021,12,26)
+
+                
+            };
+
+            Console.WriteLine(rentalManager.Add(rental1).Message);
+           
+            Console.ReadLine();
+        }
+
+        private static void CustomerList()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+
+            foreach (var customer in customerManager.GetAll().Data)
+            {
+                Console.WriteLine(customer.Email);
+            }
+        }
+
+        private static void UserList()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+
+
+            foreach (var user in userManager.GetAll().Data)
+            {
+                Console.WriteLine(user.FirstName + " = " + user.LastName);
+            }
+        }
+
+        private static void UserAdd()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+
+            User user1 = new User
+            {
+                FirstName = "Ali",
+                LastName = "Gümüş",
+                Email = "ali@hotmail.com",
+                Password = "123987"
+            };
+
+            userManager.Add(user1);
+        }
+
+        private static void CustomerAdd()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            Customer customer1 = new Customer
+            {
+                FirstName = "Mustafa",
+                LastName = "akyazı",
+                Email = "mustafa@hotmail.com",
+                Password = "010203",
+                CompanyName = "CompanyM"
+
+            };
+
+            //customerManager.Add(customer1);
+        }
+
+        private static void CarTestResult()
+        {
             CarManager carManager = new CarManager(new EfCarDal());
 
             var result = carManager.GetCarDetails();
@@ -36,9 +117,6 @@ namespace ConsoleUI
             {
                 Console.WriteLine(result.Message);
             }
-
-
-            Console.ReadLine();
         }
 
         private static void CarTestGetById()

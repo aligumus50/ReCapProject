@@ -15,7 +15,7 @@ namespace Core.DataAccess
 
     //Linqdaki expression verebilmenin syntaxı Expression<Func<T,bool>> filter=null
     //Bu sayede kategoriye göre getir, fiyata göre getir gibi metotlardan kurtuluyoruz.
-    public interface IEntityRepository<T> where T:class,IEntity,new()
+    public interface IEntityRepository<T> where T:class,IEntity, new()
     {
         List<T> GetAll(Expression<Func<T, bool>> filter = null);
         T Get(Expression<Func<T, bool>> filter); //Tek bir data için.
