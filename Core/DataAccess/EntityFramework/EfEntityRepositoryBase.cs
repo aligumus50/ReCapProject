@@ -25,6 +25,8 @@ namespace Core.DataAccess.EntityFramework
         {
             //context: veri kaynağı
             //Entry: eşleştir.
+
+            //Veri kaynağımdan benim gönderdiğim entityi bi tane nesneye eşleştir.
             using (TContext context = new TContext())
             {
                 var addedEntity = context.Entry(entity); //referansı yakala
@@ -57,6 +59,7 @@ namespace Core.DataAccess.EntityFramework
             {
                 //context.Set<Car>().ToList() Db setteki Car a yerleş ve tabloyu listeye çevir. select * from cars
                 //where(filter): filtreyi uygula.
+                //Gelen filtre null ise sol taraf filtre vermişse sağ taraf çalışır.
                 return filter == null ? context.Set<TEntity>().ToList() : context.Set<TEntity>().Where(filter).ToList();
             }
         }

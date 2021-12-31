@@ -53,7 +53,7 @@ namespace Business.Concrete
         public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
-            return new SuccessResult(Messages.BrandDeleted);
+            return new SuccessResult(Messages.BrandUpdated);
         }
 
         private bool CheckAllPropertyControls(Brand brand)

@@ -34,6 +34,8 @@ namespace Business.Constants
         //User Constants
         public static string UsersListed="Kullanıcılar Listelendi";
         public static string UserAdded="Kullanıcı Eklendi";
+        public static string UserDeleted = "Kullanıcı Silindi";
+        public static string UserUpdated = "Kullanıcı Güncellendi";
 
         //Customer Constants
         public static string CustomerAdded="Müşteri eklendi.";
@@ -48,5 +50,7 @@ namespace Business.Constants
         public static string RentalListed = "Kiralamalar Listelendi";
 
         public static string RentalNotAvailable = "Araç kiralanabilir değil";
+
+        
     }
 }
