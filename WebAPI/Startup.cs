@@ -35,10 +35,15 @@ namespace WebAPI
 
             services.AddControllers();
 
-            //Web API'nin kendi içinde IOC Container yap?s?.
-            //Biri senden ProductService isterse ona arkaplanda ProductManager olu?tur onu ver.
-            //K?saca ba??ml?l?k görürsen bunu yap.
-            services.AddSingleton<IBrandService, BrandManager>();
+            //Web API'nin kendi içinde IOC Container yapýsý.
+            //Biri senden ProductService isterse ona arkaplanda ProductManager oluþtur onu ver.
+            //Kýsaca baðýmlýlýk görürsen bunu yap.
+
+            //DependencyResolvers - autofac e taþýndý. 
+            //Web API Program.cs içinde yaptýk.
+            //Kendi IOC yapýný kullanma benim bir IOC yapýlandýrmam var. Onu demememiz gerekiyor.
+            #region
+            /*services.AddSingleton<IBrandService, BrandManager>();
             services.AddSingleton<IBrandDal, EfBrandDal>();
 
             services.AddSingleton<ICarService, CarManager>();
@@ -54,7 +59,8 @@ namespace WebAPI
             services.AddSingleton<IUserDal, EfUserDal>();
 
             services.AddSingleton<IRentalService, RentalManager>();
-            services.AddSingleton<IRentalDal, EfRentalDal>();
+            services.AddSingleton<IRentalDal, EfRentalDal>();*/
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

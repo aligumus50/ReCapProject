@@ -72,7 +72,7 @@ namespace Business.Concrete
             if (!result)
             {
 
-                return new SuccessResult(Messages.RentalAdded);
+                return new SuccessResult();
             }
 
             return new ErrorResult();
