@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
@@ -28,7 +30,7 @@ namespace Business.Concrete
             //yetkisi var mı?
             //Kurallardan geçtiyse?
 
-            if (DateTime.Now.Hour==20)
+            if (DateTime.Now.Hour==24)
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
@@ -39,7 +41,8 @@ namespace Business.Concrete
 
         public IResult Add(Car car)
         {
-            if (CheckAllPropertyControls(car))
+            #region
+            /*if (CheckAllPropertyControls(car))
             {
                 _carDal.Add(car);
                 return new SuccessResult(Messages.CarAdded);
@@ -49,10 +52,15 @@ namespace Business.Concrete
             else
             {
                 return new ErrorResult(Messages.CarDailyPriceInvalid);
-            }
-            
+            }*/
+            #endregion
+
+            ValidationTool.Validate(new CarValidator(), car);
+            _carDal.Add(car);
+            return new SuccessResult(Messages.CarAdded);
+
             //return new Result(true,"araç eklendi"); //Parametre göndermenin yöntemi constructor yapmaktır.
-            
+
         }
 
         public IResult Delete(Car car)
@@ -97,7 +105,7 @@ namespace Business.Concrete
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            if (DateTime.Now.Hour == 20)
+            if (DateTime.Now.Hour == 19)
             {
                 return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
 
